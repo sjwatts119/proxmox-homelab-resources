@@ -73,5 +73,5 @@ usermod -aG storagegroup *YOUR_USERNAME*
 ```
 
 > [!IMPORTANT]
-> Replace *YOUR_USERNAME* with the username you created in Step 3
+> Replace `*YOUR_USERNAME*` with the username you created in Step 3
 
