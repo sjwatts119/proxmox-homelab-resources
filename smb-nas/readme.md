@@ -37,7 +37,7 @@ Follow the **[Sharing Storage with an LXC](../storage/readme.md#sharing-storage-
 usermod -aG docker *YOUR_USERNAME*
 ```
 > [!IMPORTANT]
-> Replace *YOUR_USERNAME* with the username you created in Step 3
+> Replace `*YOUR_USERNAME*` with the username you created in Step 3
 
 ### Step 5: Create Docker Compose File
 Create a `docker-compose.yml` file in your LXC's home directory or any other directory you prefer. This file will define the services you want to run, such as Samba.
