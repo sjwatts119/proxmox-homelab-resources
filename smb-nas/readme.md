@@ -41,10 +41,10 @@ Create a `.env` file in the same directory as your `docker-compose.yml`. This fi
 
 Refer to the [Samba .env Example](ADD LINK) for a working example.
 
-[!CAUTION]
+> [!CAUTION]
 > The credentials provided in this file will be the ones you use to access the NAS. Ensure you set a strong password and keep this file secure.
 
-[!IMPORTANT]
+> [!IMPORTANT]
 > Ensure the USER_GID variable in the `.env` file matches the GID of the storagegroup you created in step 2. Failing to do so will result in you not being able to write files to the NAS.
 
 ### Step 7: Start the Docker Container
