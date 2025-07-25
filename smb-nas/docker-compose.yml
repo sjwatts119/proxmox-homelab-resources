@@ -9,7 +9,7 @@ services:
             NAME: "${SHARE_NAME}"
             USER: "${SAMBA_USERNAME}"
             PASS: "${SAMBA_PASSWORD}"
-#            GID: "6969"
+            GID:  "${NAS_GID}"
         ports:
             - "445:445"
         volumes:
