@@ -11,7 +11,7 @@ In your Proxmox web interface, navigate to the storage section and create a new 
 
 You can choose multiple drives in a RAID configuration, or a single drive. Ensure that the ZFS volume is large enough to accommodate the data you plan to store.
 
-[!IMPORTANT]
+> [!IMPORTANT]
 > Choose a good name for your ZFS volume as you will need to reference it later in this setup.
 
 ### Step 2: Access Proxmox Host Shell
@@ -37,7 +37,7 @@ mkdir /*YOUR_ZFS_VOLUME*/storage
 
 ### Step 5: Set Permissions for the Storage Directory
 
->[!IMPORTANT]
+> [!IMPORTANT]
 > Proxmox maps UIDs/GIDs inside the LXC to different ones in the host. This is to ensure that host level permissions are never acquirable from inside an unprivileged LXC, even if it is compromised.
 > 
 > Proxmox will map any IDs inside an unprivileged LXC to a range between 100000-165535 on the host.
