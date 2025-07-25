@@ -1,8 +1,12 @@
-# Storage
+# Sharing Storage Between Proxmox LXCs
 
 ## Introduction
 
-## Prerequisites
+Passing data between proxmox LXCs is a really common requirement, but I ran into quite a few issues with sharing the data between containers.
+
+This setup allows you to mount a common storage directory directly in any other LXC you create without any permissions issues, allowing for writes too.
+
+An example of where this approach shines is with media servers like Jellyfin or Plex, where you might want to upload media files directly to a NAS and have them automatically available in your media server.
 
 ## Setup
 
@@ -39,9 +43,9 @@ mkdir /*YOUR_ZFS_VOLUME*/storage
 
 > [!IMPORTANT]
 > Proxmox maps UIDs/GIDs inside the LXC to different ones in the host. This is to ensure that host level permissions are never acquirable from inside an unprivileged LXC, even if it is compromised.
-> 
+>
 > Proxmox will map any IDs inside an unprivileged LXC to a range between 100000-165535 on the host.
-> 
+>
 > For example, if you have a group in the LXC with a GID of `1234`, the permissions of this group will be mapped to the GID of `101234` on the host.
 
 Here is where we will decide on the required GID for accessing the storage directory. For this example, we will use `2468` as the GID inside our LXCs, but you can choose any GID you prefer as long as it does not conflict with existing groups.
@@ -85,11 +89,11 @@ nano /etc/pve/lxc/*YOUR_LXC_ID*.conf
 Add the following line to the configuration file to create a new bind mount:
 
 ```plaintext
-mp0: /mnt/pve/*YOUR_STORAGE_DIRECTORY*,mp=/mnt/*YOUR_MOUNT_POINT*
+mp0: /*YOUR_ZFS_VOLUME*/storage,mp=/mnt/*YOUR_MOUNT_POINT*
 ```
 > [!IMPORTANT]
-> Replace `*YOUR_STORAGE_DIRECTORY*` with the storage directory you set up.
-> 
+> Replace `*YOUR_ZFS_VOLUME*` with the folder name of your ZFS volume from Step 3 above.
+>
 > Replace `*YOUR_MOUNT_POINT*` with the directory you will use to access the storage within the LXC. If you were to call it `nas`, you would access the storage at `/mnt/nas` within the LXC.
 
 ### Step 3: Access the LXC Shell
@@ -104,7 +108,7 @@ ls -l /mnt/*YOUR_MOUNT_POINT*
 ```
 > [!IMPORTANT]
 > Replace `*YOUR_MOUNT_POINT*` with the mount point you specified in Step 2.
- 
+
 > [!TIP]
 > If the bind mount was successful, you should see the contents of your storage directory listed.
 
@@ -121,21 +125,21 @@ adduser *YOUR_USERNAME*
 > [!TIP]
 > You can press Enter to skip optional fields like Full Name, Room Number, etc.
 
-### Step 5: Create User Group
+### Step 5: Create Storage Group
 ```bash
 groupadd storagegroup -g *YOUR_GROUP_ID*
 ```
 > [!IMPORTANT]  
-> Ensure you replace `*YOUR_GROUP_ID*` with the group ID you set up for the Storage directory. Failure to do so may result in permission issues later.
+> Ensure you replace `*YOUR_GROUP_ID*` with the group ID you set up for the storage directory (e.g., `2468` from our example). Failure to do so may result in permission issues later.
 
-### Step 6: Add Users to the NAS User Group
+### Step 6: Add Users to the Storage Group
 ```bash
 usermod -aG storagegroup root
 usermod -aG storagegroup *YOUR_USERNAME*
 ```
 
 > [!IMPORTANT]
-> Replace `*YOUR_USERNAME*` with the username you created in Step 3
+> Replace `*YOUR_USERNAME*` with the username you created in Step 4.
 
 ### Step 7: Test Permissions
 To ensure everything is set up correctly, you can test the permissions by creating a file in the storage directory:
