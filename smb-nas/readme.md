@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Setting up a NAS was one of the primary reasons I had for my homelab, but I ran into quite a few issues with sharing the data between other containers.
+Setting up a NAS was one of the primary purposes I had for my homelab, but I ran into quite a few issues with sharing the data between other containers.
 
 This setup allows you to mount your NAS storage directory directly in any other LXC you create without any permissions issues. 
 
@@ -14,7 +14,7 @@ It uses the **[Dockurr/Samba](https://github.com/dockur/samba)** Docker image fo
 
 This guide assumes you have followed the **[Storage Setup Guide](../storage/readme.md)** and have configured storage permissions on the Proxmox host properly. This will allow you to have a fully modular storage setup which is entirely external of this LXC.
 
-## Installation
+## Setup
 
 ### Step 1: Set Up A New LXC
 
@@ -61,7 +61,7 @@ Refer to the [Samba .env Example](../smb-nas/.env) for a working example.
 > The credentials provided in this file will be the ones you use to access the NAS. Ensure you set a strong password and keep this file secure.
 
 > [!IMPORTANT]
-> Ensure the USER_GID variable in the `.env` file matches the GID of the storage group you created in step 2. Failing to do so will result in your NAS being read-only.
+> Ensure the USER_GID variable in the `.env` file matches the GID of the storage group you created in **[Step 5 of "Sharing Storage with an LXC"](../storage/readme.md#step-5-create-user-group)**. Failing to do so will result in your NAS being read-only.
 
 ### Step 7: Start The Docker Container
 Navigate to the directory where your `docker-compose.yml` and `.env` files are located, and run the following command to start the Samba service:
