@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+    samba:
+        image: dockurr/samba
+        container_name: smb-nas
+        restart: unless-stopped
+        environment:
+            NAME: "${SHARE_NAME}"
+            USER: "${SAMBA_USERNAME}"
+            PASS: "${SAMBA_PASSWORD}"
+#            GID: "6969"
+        ports:
+            - "445:445"
+        volumes:
+            - /share/nas-data:/storage
