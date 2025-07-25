@@ -11,13 +11,11 @@
 ### Step 2: Configure Permissions for Storage Directory
 
 >[!IMPORTANT]
-> Proxmox maps UIDs/GIDs from the host to the LXC. This is to ensure that host level permissions are never acquirable from inside an unprivileged LXC, even if it is compromised.
+> Proxmox maps UIDs/GIDs inside the LXC to different ones in the host. This is to ensure that host level permissions are never acquirable from inside an unprivileged LXC, even if it is compromised.
 > 
-> Proxmox will map any IDs inside an unprivileged LXC to a range between 100000-165535.
+> Proxmox will map any IDs inside an unprivileged LXC to a range between 100000-165535 on the host.
 > 
-> For example, if you have a group in the LXC with a GID of `1234`, the permissions of this group will be mapped to the GID of `101234` on the Proxmox host.
-
-
+> For example, if you have a group in the LXC with a GID of `1234`, the permissions of this group will be mapped to the GID of `101234` on the host.
 
 ## Sharing Storage with an Unprivileged LXC
 
