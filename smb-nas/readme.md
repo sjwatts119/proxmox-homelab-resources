@@ -8,7 +8,7 @@ This setup allows you to mount your NAS storage directory directly in any other 
 
 This is particularly useful for media servers like Jellyfin or Plex where you might want to upload media files directly to the NAS and have them automatically available in your media server.
 
-It uses the **[Dockurr/Samba](https://github.com/dockur/samba)** Docker image for a quick and easy setup.
+I'm using the **[dockurr/samba](https://github.com/dockur/samba)** Docker image for a quick and easy setup.
 
 ## Prerequisites
 
@@ -24,9 +24,12 @@ Install the **[Docker LXC Template](https://community-scripts.github.io/ProxmoxV
 - CPU: 1 core
 - RAM: 2048MB
 - Network: Static IP (optional, but recommended for easier access if you don't manage your own DHCP server)
+- Unprivileged
 
-### Step 2: Create Storage Bind Mount
+### Step 2: Set up Storage Bind Mount and Configure User Permissions
 Follow the **[Sharing Storage with an LXC](../storage/readme.md#sharing-storage-with-an-lxc)** steps to create a storage bind mount for your LXC. This will allow the LXC to access the storage directory you set up.
+
+Ensure you have created a user and group for the LXC that matches the GID of the storage group you created in **[Step 5 of "Sharing Storage with an LXC"](../storage/readme.md#step-5-create-user-group)**.
 
 ### Step 3: Access the LXC Shell
 > [!IMPORTANT]

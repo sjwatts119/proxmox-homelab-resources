@@ -6,9 +6,20 @@
 
 ## Setup
 
-### Sharing Storage with an LXC
+### Step 1: Access Proxmox Host Shell
 
-### Step 1: Access the Proxmox Root Shell
+### Step 2: Configure Permissions for Storage Directory
+
+>[!IMPORTANT]
+> Proxmox maps UIDs/GIDs from the host to the LXC. This is to ensure that host level permissions are never acquirable from inside an unprivileged LXC, even if it is compromised.
+> 
+> Proxmox will map any IDs inside an unprivileged LXC to a range between 100000-165535.
+> 
+> For example, if you have a group in the LXC with a GID of `1234`, the permissions of this group will be mapped to the GID of `101234` on the Proxmox host.
+
+### Sharing Storage with an unprivileged LXC
+
+### Step 1: Access the Proxmox Host Shell
 > [!IMPORTANT]
 > Ensure your LXC has been shut down before proceeding.
 
@@ -74,4 +85,3 @@ usermod -aG storagegroup *YOUR_USERNAME*
 
 > [!IMPORTANT]
 > Replace `*YOUR_USERNAME*` with the username you created in Step 3
-
