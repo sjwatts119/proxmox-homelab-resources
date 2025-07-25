@@ -14,8 +14,8 @@ Install the **[Docker LXC Template](https://community-scripts.github.io/ProxmoxV
 
 **Recommended specifications:**
 - CPU: 1 core
-- RAM: 1024MB
-- Network: Static IP (note this for later if you don't manage your own DHCP server)
+- RAM: 2048MB
+- Network: Static IP (optional, but recommended for easier access if you don't manage your own DHCP server)
 
 ### Step 2: Create Storage Bind Mount
 Follow the **[Sharing Storage with an LXC](TODO ADD LINK)** steps to create a storage bind mount for your LXC. This will allow the LXC to access the storage directory you set up.
@@ -34,10 +34,18 @@ usermod -aG docker *YOUR_USERNAME*
 ### Step 5: Create Docker Compose File
 Create a `docker-compose.yml` file in your LXC's home directory or any other directory you prefer. This file will define the services you want to run, such as Samba.
 
+```bash
+nano docker-compose.yml
+```
+
 Refer to the [Samba Docker Compose Example](ADD LINK) for a working example.
 
 ### Step 6: Create .env File
 Create a `.env` file in the same directory as your `docker-compose.yml`. This file will contain a number of environment variables that will be used by the Docker Compose file.
+
+```bash
+nano .env
+```
 
 Refer to the [Samba .env Example](ADD LINK) for a working example.
 
@@ -45,7 +53,7 @@ Refer to the [Samba .env Example](ADD LINK) for a working example.
 > The credentials provided in this file will be the ones you use to access the NAS. Ensure you set a strong password and keep this file secure.
 
 > [!IMPORTANT]
-> Ensure the USER_GID variable in the `.env` file matches the GID of the storagegroup you created in step 2. Failing to do so will result in you not being able to write files to the NAS.
+> Ensure the USER_GID variable in the `.env` file matches the GID of the storage group you created in step 2. Failing to do so will result in your NAS being read-only.
 
 ### Step 7: Start the Docker Container
 Navigate to the directory where your `docker-compose.yml` and `.env` files are located, and run the following command to start the Samba service:
@@ -60,5 +68,5 @@ docker-compose up -d
 ### Step 8: Access the Samba Share
 You can now access the Samba share from any device on your network. Use the IP address of your LXC and the credentials you set in the `.env` file to connect.
 
-### Step 10: Verify Permissions
+### Step 9: Verify Permissions
 Ensure you can create, read, and delete files in the Samba share. If you encounter permission issues, double-check the GID in your `.env` file and ensure it matches the GID of the storage group you created earlier.
