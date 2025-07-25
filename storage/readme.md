@@ -139,5 +139,9 @@ usermod -aG storagegroup *YOUR_USERNAME*
 
 ### Step 7: Test Permissions
 To ensure everything is set up correctly, you can test the permissions by creating a file in the storage directory:
+
 ```bash
-touch /
+touch /mnt/*YOUR_MOUNT_POINT*/testfile.txt
+```
+> [!IMPORTANT]
+> Replace `*YOUR_MOUNT_POINT*` with the mount point you specified in Step 2.
