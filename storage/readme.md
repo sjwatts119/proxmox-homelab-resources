@@ -17,7 +17,9 @@
 > 
 > For example, if you have a group in the LXC with a GID of `1234`, the permissions of this group will be mapped to the GID of `101234` on the Proxmox host.
 
-### Sharing Storage with an unprivileged LXC
+
+
+## Sharing Storage with an Unprivileged LXC
 
 ### Step 1: Access the Proxmox Host Shell
 > [!IMPORTANT]
