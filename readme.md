@@ -10,3 +10,7 @@ After a few iterations of building up a proxmox homelab and eventually breaking 
 ### [Sharing Storage Between LXCs](storage/readme.md)
 
 ### [Samba NAS Setup](smb-nas/readme.md)
+
+## Yet To Be Added
+
+### Windows VM With GPU Passthrough For Game Streaming
