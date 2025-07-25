@@ -13,4 +13,4 @@ services:
         ports:
             - "445:445"
         volumes:
-            - /share/nas-data:/storage
+            - /mnt/storage:/storage
